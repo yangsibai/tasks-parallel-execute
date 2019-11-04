@@ -131,7 +131,7 @@ version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
-name = "tasks-paralle-execute"
+name = "tasks-parallel-execute"
 version = "0.1.0"
 dependencies = [
  "crossbeam 0.7.2 (registry+https://github.com/rust-lang/crates.io-index)",

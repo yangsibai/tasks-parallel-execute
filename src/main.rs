@@ -8,7 +8,6 @@ use std::time::Duration;
 
 fn main() {
     let cpu_num = num_cpus::get();
-    println!("CPUs: {}", cpu_num);
 
     let mut tasks = Vec::new();
     let stdin = io::stdin();
@@ -25,6 +24,7 @@ fn main() {
                 .collect::<Vec<&String>>();
             scope.spawn(move |_| {
                 for task in my_tasks {
+                    println!("{}", task);
                     let cmds = parse_cmds(task);
                     execute_commands(&cmds);
                 }
@@ -38,15 +38,13 @@ fn main() {
 struct Cmd(String, Vec<String>);
 
 fn execute_commands(cmds: &Vec<Cmd>) {
-    println!("{:?}", cmds);
     for cmd in cmds {
-        println!("{}", &cmd.0);
         let output = Command::new(&cmd.0)
             .args(&cmd.1)
             .output()
             .expect("Failed to execute process.");
         if !output.status.success() {
-            println!("{:?}", output.status);
+            println!("{:?}", output);
         }
     }
 }
